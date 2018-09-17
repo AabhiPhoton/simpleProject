@@ -1,6 +1,10 @@
 package net.photon.springboot.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -10,8 +14,18 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long personId;
+
     private String firstName;
+
     private String lastName;
+
+    @Column(name = "created_timestamp", nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdTimeStamp;
+
+    @Column(name = "updated_timestamp", nullable = false)
+    @UpdateTimestamp
+    private LocalDateTime updatedTimeStamp;
 
     protected Person() {
     }
@@ -43,6 +57,22 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public LocalDateTime getCreatedTimeStamp() {
+        return createdTimeStamp;
+    }
+
+    public void setCreatedTimeStamp(LocalDateTime createdTimeStamp) {
+        this.createdTimeStamp = createdTimeStamp;
+    }
+
+    public LocalDateTime getUpdatedTimeStamp() {
+        return updatedTimeStamp;
+    }
+
+    public void setUpdatedTimeStamp(LocalDateTime updatedTimeStamp) {
+        this.updatedTimeStamp = updatedTimeStamp;
     }
 
     @Override

@@ -8,12 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.util.List;
 
 @Api(value = "Summary", description = "Displays the welcome message and has rest calls for people summary")
@@ -42,6 +38,17 @@ public class SummaryController {
         Person person = personService.getPersonById(id);
         if (person != null) {
             return new ResponseEntity<>(person, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @ApiOperation(value = "Adds a new person to the database")
+    @RequestMapping(value = "/persons", method = RequestMethod.POST)
+    public ResponseEntity<Person> addPerson(@RequestBody Person person) {
+        boolean save = personService.save(person);
+        if (save) {
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

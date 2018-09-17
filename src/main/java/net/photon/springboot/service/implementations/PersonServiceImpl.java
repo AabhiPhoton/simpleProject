@@ -24,6 +24,16 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.getOne(id);
     }
 
+    @Override
+    public boolean save(Person person) {
+        Person p = personRepository.save(person);
+        if (p != null && p.getPersonId() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public void setPersonRepository(PersonRepository personRepository) {
         this.personRepository = personRepository;

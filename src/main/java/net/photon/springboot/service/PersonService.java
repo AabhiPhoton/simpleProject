@@ -10,5 +10,5 @@ public interface PersonService {
 
     Person getPersonById(long id);
 
-
+    boolean save(Person person);
 }
