@@ -5,7 +5,10 @@ import io.swagger.annotations.ApiOperation;
 import net.photon.springboot.model.Person;
 import net.photon.springboot.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +25,7 @@ public class SummaryController {
 
     @ApiOperation(value = "Performs Get operation and gives welcome message")
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String firstMessage(){
+    public String firstMessage() {
         return "Welcome to Photon Spring Boot Training Example";
     }
 
@@ -32,4 +35,17 @@ public class SummaryController {
     public List<Person> getAllPersons() {
         return personService.getAllPersons();
     }
+
+    @ApiOperation(value = "Gets JSON for person of the requested Id")
+    @RequestMapping(value = "/persons/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Person> getPerson(@PathVariable long id) {
+        Person person = personService.getPersonById(id);
+        if (person != null) {
+            return new ResponseEntity<>(person, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 }

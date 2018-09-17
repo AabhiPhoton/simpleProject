@@ -19,6 +19,11 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findAll();
     }
 
+    @Override
+    public Person getPersonById(long id) {
+        return personRepository.getOne(id);
+    }
+
 
     public void setPersonRepository(PersonRepository personRepository) {
         this.personRepository = personRepository;
