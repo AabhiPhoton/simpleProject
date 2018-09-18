@@ -1,12 +1,18 @@
 package net.photon.springboot.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
+@ApiModel(value = "Person model that hold information of the person in system")
 @Entity
 @Table(name = "person")
 public class Person {
@@ -15,8 +21,15 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long personId;
 
+    @ApiModelProperty("First Name of the person can be 2 to 50 characters in length")
+    @Size(min = 2, max = 50, message = "First Name should be 2 to 50 characters in length")
+    @NotNull(message = "First Name cannot be empty")
     private String firstName;
 
+
+    @ApiModelProperty("Last Name of the person can be 2 to 50 characters in length")
+    @Size(min = 2, max = 50, message = "last Name should be 2 to 50 characters in length")
+    @NotNull(message = "Last Name cannot be empty")
     private String lastName;
 
     @Column(name = "created_timestamp", nullable = false, updatable = false)

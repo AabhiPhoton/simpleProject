@@ -10,8 +10,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
+@SuppressWarnings("unused")
 @Api(value = "Summary", description = "Displays the welcome message and has rest calls for people summary")
 @RestController
 public class SummaryController {
@@ -45,7 +47,7 @@ public class SummaryController {
 
     @ApiOperation(value = "Adds a new person to the database")
     @RequestMapping(value = "/persons", method = RequestMethod.POST)
-    public ResponseEntity<Person> addPerson(@RequestBody Person person) {
+    public ResponseEntity<Person> addPerson(@Valid @RequestBody Person person) {
         boolean save = personService.save(person);
         if (save) {
             return new ResponseEntity<>(HttpStatus.OK);
