@@ -1,6 +1,8 @@
 package net.photon.springboot.service.implementations;
 
 import net.photon.springboot.Repository.PersonRepository;
+import net.photon.springboot.beans.PersonBean;
+import net.photon.springboot.mapper.PersonMapper;
 import net.photon.springboot.model.Person;
 import net.photon.springboot.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +29,16 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public boolean save(Person person) {
         Person p = personRepository.save(person);
-        if (p != null && p.getPersonId() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return p != null && p.getPersonId() > 0L;
+    }
+
+    @Override
+    public PersonBean getPersonBean(long id) {
+        return PersonMapper.INSTANCE.toPersonBean(personRepository.getOne(id));
     }
 
 
+    @SuppressWarnings("unused")
     public void setPersonRepository(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }

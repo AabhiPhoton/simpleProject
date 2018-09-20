@@ -2,6 +2,7 @@ package net.photon.springboot.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import net.photon.springboot.beans.PersonBean;
 import net.photon.springboot.model.Person;
 import net.photon.springboot.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class SummaryController {
 
     @ApiOperation(value = "Gets JSON for person of the requested Id")
     @RequestMapping(value = "/persons/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Person> getPerson(@PathVariable long id) {
-        Person person = personService.getPersonById(id);
+    public ResponseEntity<PersonBean> getPerson(@PathVariable long id) {
+        PersonBean person = personService.getPersonBean(id);
         if (person != null) {
             return new ResponseEntity<>(person, HttpStatus.OK);
         } else {

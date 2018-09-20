@@ -1,5 +1,6 @@
 package net.photon.springboot.beans;
 
+@SuppressWarnings("unused")
 public class PersonBean {
 
     private long personId;

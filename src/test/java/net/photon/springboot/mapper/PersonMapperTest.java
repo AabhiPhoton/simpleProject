@@ -16,6 +16,7 @@ public class PersonMapperTest {
         PersonBean bean = PersonMapper.INSTANCE.toPersonBean(person);
 
         assertThat(bean, is(not(nullValue())));
+        assertThat(bean.getFirstName(), is(person.getFirstName()));
 
     }
 }
