@@ -40,7 +40,7 @@ public class Person {
     @UpdateTimestamp
     private LocalDateTime updatedTimeStamp;
 
-    protected Person() {
+    public Person() {
     }
 
     public Person(String firstName, String lastName) {

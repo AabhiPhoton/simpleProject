@@ -1,6 +1,9 @@
 package net.photon.springboot.beans;
 
+import org.springframework.stereotype.Component;
+
 @SuppressWarnings("unused")
+@Component
 public class PersonBean {
 
     private long personId;

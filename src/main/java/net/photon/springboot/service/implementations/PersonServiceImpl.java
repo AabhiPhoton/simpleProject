@@ -17,11 +17,13 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
 
     @Override
+    @SuppressWarnings("deprecated")
     public List<Person> getAllPersons() {
         return personRepository.findAll();
     }
 
     @Override
+    @SuppressWarnings("deprecated")
     public Person getPersonById(long id) {
         return personRepository.getOne(id);
     }
@@ -35,6 +37,11 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonBean getPersonBean(long id) {
         return PersonMapper.INSTANCE.toPersonBean(personRepository.getOne(id));
+    }
+
+    @Override
+    public List<PersonBean> getAllPersonBeans() {
+        return PersonMapper.INSTANCE.toPersonBeanList(personRepository.findAll());
     }
 
 

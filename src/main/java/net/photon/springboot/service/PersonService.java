@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface PersonService {
 
+    @Deprecated
     List<Person> getAllPersons();
 
     @Deprecated
@@ -15,4 +16,6 @@ public interface PersonService {
     boolean save(Person person);
 
     PersonBean getPersonBean(long id);
+
+    List<PersonBean> getAllPersonBeans();
 }

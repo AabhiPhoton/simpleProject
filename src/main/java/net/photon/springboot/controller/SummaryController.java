@@ -31,8 +31,8 @@ public class SummaryController {
 
     @ApiOperation(value = "Gets JSON for all the persons from the dB")
     @RequestMapping(value = "/persons", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> getAllPersons() {
-        return personService.getAllPersons();
+    public List<PersonBean> getAllPersons() {
+        return personService.getAllPersonBeans();
     }
 
     @ApiOperation(value = "Gets JSON for person of the requested Id")
@@ -55,6 +55,13 @@ public class SummaryController {
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+
+    @ApiOperation(value = "deletes a person in the database")
+    @RequestMapping(value = "/persons/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deletePerson(@PathVariable long id) {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
