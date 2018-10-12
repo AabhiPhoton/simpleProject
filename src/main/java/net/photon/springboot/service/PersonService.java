@@ -18,4 +18,10 @@ public interface PersonService {
     PersonBean getPersonBean(long id);
 
     List<PersonBean> getAllPersonBeans();
+
+    List<PersonBean> getPersonBeansByName(String name);
+
+    List<PersonBean> getPersonsByLastName(String lastName);
+
+
 }
